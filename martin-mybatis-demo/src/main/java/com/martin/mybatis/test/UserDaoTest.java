@@ -24,5 +24,6 @@ public class UserDaoTest {
 
         //从根便签开始解析
         Configuration configuration = xmlConfigParser.parser(document.getRootElement());
+        System.out.println(configuration);
     }
 }
