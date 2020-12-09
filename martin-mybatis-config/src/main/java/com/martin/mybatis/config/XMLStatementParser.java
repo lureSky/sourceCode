@@ -10,7 +10,7 @@ public class XMLStatementParser {
         this.configuration = configuration;
     }
 
-    public void parseStatement(Element selectElement,String namespace) {
+    public void parseStatement(Element selectElement, String namespace) {
         // 一个MappedStatement对象，就对应一个select标签
         String id = selectElement.attributeValue("id");
         //获取类型以后可能存在别名，注意
@@ -44,10 +44,12 @@ public class XMLStatementParser {
 
     /**
      * 创建SqlSource其实就是对select等CRUD标签中的sql脚本进行处理
+     *
      * @param selectElement
      * @return
      */
     private SqlSource createSqlSource(Element selectElement) {
+        //返回node的数量
         XMLScriptParser scriptParser = new XMLScriptParser(configuration);
         SqlSource sqlSource = scriptParser.parseScriptNode(selectElement);
         return sqlSource;
