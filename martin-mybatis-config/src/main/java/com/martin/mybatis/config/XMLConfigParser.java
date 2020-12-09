@@ -48,9 +48,7 @@ public class XMLConfigParser {
      * @date: 2020-12-08 21:42
     */
     private void parseMappers(Element element) {
-        //TODO
         List<Element> mappers = element.elements("mapper");
-
         for (Element mapper : mappers) {
             parseMapper(mapper);
         }
