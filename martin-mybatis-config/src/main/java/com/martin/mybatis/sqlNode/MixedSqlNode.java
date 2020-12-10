@@ -1,7 +1,6 @@
 package com.martin.mybatis.sqlNode;
 
-import com.martin.mybatis.config.DynamicContext;
-import com.martin.mybatis.sqlNode.SqlNode;
+import com.martin.mybatis.sqlSource.DynamicContext;
 
 import java.util.ArrayList;
 import java.util.List;

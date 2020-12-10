@@ -1,4 +1,4 @@
-package com.martin.mybatis.config;
+package com.martin.mybatis.sqlSource;
 
 /**
  * 参数映射类
@@ -7,6 +7,10 @@ public class ParameterMapping {
 
     private String name;
     private Class<?> type;
+
+    public ParameterMapping(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;

@@ -34,4 +34,16 @@ public class MappedStatement {
             return mappedStatement;
         }
     }
+
+    public SqlSource getSqlSource() {
+        return sqlSource;
+    }
+
+    public String getStatementType() {
+        return statementType;
+    }
+
+    public Class<?> getResultTypeClass() {
+        return resultTypeClass;
+    }
 }

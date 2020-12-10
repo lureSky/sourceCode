@@ -1,6 +1,8 @@
 package com.martin.mybatis.dao;
 
 import com.martin.mybatis.po.User;
+import com.martin.mybatis.sqlSession.SqlSession;
+import com.martin.mybatis.sqlSession.SqlSessionFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,13 +19,22 @@ import java.sql.SQLException;
  */
 public class UserDaoImpl implements UserDao {
 
+	private SqlSessionFactory sqlSessionFactory;
+
+	public UserDaoImpl(SqlSessionFactory sqlSessionFactory) {
+		this.sqlSessionFactory = sqlSessionFactory;
+	}
+
+	@Override
 	public User queryUserById2(User param) {
-		return null;
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		return sqlSession.selectOne("test.findUserById",param);
 	}
 
 	/**
 	 * 先使用JDBC实现
 	 */
+	@Override
 	public User queryUserById(User param) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

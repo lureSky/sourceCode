@@ -1,6 +1,6 @@
 package com.martin.mybatis.sqlNode;
 
-import com.martin.mybatis.config.DynamicContext;
+import com.martin.mybatis.sqlSource.DynamicContext;
 
 /**
  * 提供对Sql脚本的解析

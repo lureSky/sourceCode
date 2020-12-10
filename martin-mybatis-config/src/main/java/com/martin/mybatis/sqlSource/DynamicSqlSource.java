@@ -1,9 +1,7 @@
 package com.martin.mybatis.sqlSource;
 
-import com.martin.mybatis.config.BoundSql;
 import com.martin.mybatis.sqlNode.MixedSqlNode;
 import com.martin.mybatis.sqlNode.SqlNode;
-import com.martin.mybatis.sqlSource.SqlSource;
 
 /**
  * 专门封装和处理 动态标签  ${}的sql语句
@@ -28,6 +26,13 @@ public class DynamicSqlSource implements SqlSource {
     */
     @Override
     public BoundSql getBoundSql(Object param) {
-        return null;
+        //首先调用SqlNode将标签和#{}处理下
+        DynamicContext context = new DynamicContext(param);
+        rootSqlNode.apply(context);
+
+        //调用sqlSourceParser处理#{}
+        SqlSourceParser sqlSourceParser = new SqlSourceParser();
+        SqlSource sqlSource = sqlSourceParser.parse(context.getSql());
+        return sqlSource.getBoundSql(param);
     }
 }

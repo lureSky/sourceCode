@@ -1,4 +1,4 @@
-package com.martin.mybatis.config;
+package com.martin.mybatis.sqlSource;
 
 import java.util.HashMap;
 import java.util.Map;

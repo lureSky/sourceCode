@@ -1,4 +1,4 @@
-package com.martin.mybatis.config;
+package com.martin.mybatis.utils;
 
 import java.io.InputStream;
 import java.io.Reader;

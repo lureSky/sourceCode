@@ -1,8 +1,6 @@
 package com.martin.mybatis.sqlNode;
 
-import com.martin.mybatis.config.DynamicContext;
-import com.martin.mybatis.sqlNode.MixedSqlNode;
-import com.martin.mybatis.sqlNode.SqlNode;
+import com.martin.mybatis.sqlSource.DynamicContext;
 import com.martin.mybatis.utils.OgnlUtils;
 
 /**

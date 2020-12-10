@@ -1,4 +1,4 @@
-package com.martin.mybatis.config;
+package com.martin.mybatis.sqlSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,8 @@ public class BoundSql {
     }
 
 
-    public BoundSql(String sql) {
+    public BoundSql(String sql,List<ParameterMapping> parameterMappings) {
         this.sql = sql;
+        this.parameterMappings = parameterMappings;
     }
 }

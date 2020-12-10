@@ -1,6 +1,5 @@
 package com.martin.mybatis.sqlSource;
 
-import com.martin.mybatis.config.BoundSql;
 import com.martin.mybatis.sqlNode.MixedSqlNode;
 import com.martin.mybatis.sqlNode.SqlNode;
 
@@ -11,15 +10,20 @@ import com.martin.mybatis.sqlNode.SqlNode;
  */
 public class RawSqlSource implements SqlSource {
 
-    private SqlNode rootSqlNode;
+    private SqlSource sqlSource;
 
     public RawSqlSource(MixedSqlNode rootSqlNode) {
-        this.rootSqlNode = rootSqlNode;
+        DynamicContext context = new DynamicContext(null);
+        rootSqlNode.apply(context);
         //先对sql结点进行解析
+
+        SqlSourceParser sqlSourceParser = new SqlSourceParser();
+        sqlSource =sqlSourceParser.parse(context.getSql());
     }
 
     @Override
     public BoundSql getBoundSql(Object param) {
-        return null;
+        // 从staticSqlSource中获取相应信息
+        return sqlSource.getBoundSql(param);
     }
 }

@@ -1,7 +1,5 @@
 package com.martin.mybatis.sqlSource;
 
-import com.martin.mybatis.config.BoundSql;
-
 /**
  * 描述：
  * 该接口的主要作用是
