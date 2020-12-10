@@ -1,4 +1,6 @@
-package com.martin.mybatis.config;
+package com.martin.mybatis.sqlSource;
+
+import com.martin.mybatis.config.BoundSql;
 
 /**
  * 描述：

@@ -1,5 +1,6 @@
 package com.martin.mybatis.config;
 
+import com.martin.mybatis.sqlSource.SqlSource;
 import org.dom4j.Element;
 
 public class XMLStatementParser {

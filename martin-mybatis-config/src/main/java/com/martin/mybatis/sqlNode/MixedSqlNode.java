@@ -1,4 +1,7 @@
-package com.martin.mybatis.config;
+package com.martin.mybatis.sqlNode;
+
+import com.martin.mybatis.config.DynamicContext;
+import com.martin.mybatis.sqlNode.SqlNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +10,7 @@ import java.util.List;
  * @author caofeng
  * @date 2020/12/10 10:00
  */
-public class MixedSqlNode implements SqlNode{
+public class MixedSqlNode implements SqlNode {
 
     //封装所有的sqlNode
     private List<SqlNode> sqlNodes = new ArrayList<>();

@@ -31,7 +31,7 @@ public class XMLMapperParser {
     public void parse(Element rootElement) {
         //mapper下面会有sql片段标签，resultMap标签，直接解析处理      statement相关标签需要用Statement解析器
         String namespace = rootElement.attributeValue("namespace");
-        //TODO 此处可以Xpath语法，来进行通配
+        //TODO Xpath改进 select|update|delete|insert
         List<Element> selectElements = rootElement.elements("select");
         for (Element selectElement : selectElements) {
             //每一种（select update insert delete）  都对应一个statement

@@ -1,5 +1,7 @@
 package com.martin.mybatis.config;
 
+import com.martin.mybatis.sqlSource.SqlSource;
+
 public class MappedStatement {
 
     private String statementId;

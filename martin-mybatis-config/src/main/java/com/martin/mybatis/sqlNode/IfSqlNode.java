@@ -1,12 +1,15 @@
-package com.martin.mybatis.config;
+package com.martin.mybatis.sqlNode;
 
+import com.martin.mybatis.config.DynamicContext;
+import com.martin.mybatis.sqlNode.MixedSqlNode;
+import com.martin.mybatis.sqlNode.SqlNode;
 import com.martin.mybatis.utils.OgnlUtils;
 
 /**
  * @author caofeng
  * @date 2020/12/10 14:20
  */
-public class IfSqlNode implements SqlNode{
+public class IfSqlNode implements SqlNode {
 
     private String test;
     private MixedSqlNode rootSqlNode;

@@ -1,5 +1,10 @@
 package com.martin.mybatis.config;
 
+import com.martin.mybatis.sqlNode.*;
+import com.martin.mybatis.sqlNode.handler.NodeHandler;
+import com.martin.mybatis.sqlSource.DynamicSqlSource;
+import com.martin.mybatis.sqlSource.RawSqlSource;
+import com.martin.mybatis.sqlSource.SqlSource;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.Text;
@@ -16,7 +21,7 @@ public class XMLScriptParser {
 
     private Configuration configuration;
 
-    private Map<String,NodeHandler> nodeHandlerMap = new HashMap<>();
+    private Map<String, NodeHandler> nodeHandlerMap = new HashMap<>();
 
     //是否是属于动态标签，如果是则修改
     private boolean isDynamic = false;
@@ -29,7 +34,7 @@ public class XMLScriptParser {
     private void initNodeHandlerMap() {
         nodeHandlerMap.put("if",new IfNodeHandler());
         nodeHandlerMap.put("where",new WhereNodeHandler());
-        nodeHandlerMap.put("foreach",new ForeachNodeHandler());
+        nodeHandlerMap.put("foreach",new ForEachNodeHandler());
     }
 
     /**
@@ -97,5 +102,47 @@ public class XMLScriptParser {
             }
         }
         return new MixedSqlNode(contents);
+    }
+
+    private class IfNodeHandler implements NodeHandler{
+
+        @Override
+        public void handlerNode(Element nodeToHandle, List<SqlNode> targetContents) {
+            //对if标签进行解析
+            MixedSqlNode rootSqlNode = parseDynamicTags(nodeToHandle);
+
+            //if标签一般跟着一个test判定条件
+            String test = nodeToHandle.attributeValue("test");
+            IfSqlNode ifSqlNode = new IfSqlNode(test,rootSqlNode);
+            targetContents.add(ifSqlNode);
+        }
+    }
+    private class WhereNodeHandler implements NodeHandler{
+
+        @Override
+        public void handlerNode(Element nodeToHandle, List<SqlNode> targetContents) {
+            //对where标签进行解析
+            MixedSqlNode rootSqlNode = parseDynamicTags(nodeToHandle);
+            WhereSqlNode whereSqlNode = new WhereSqlNode(configuration,rootSqlNode);
+            targetContents.add(whereSqlNode);
+        }
+    }
+    private class ForEachNodeHandler implements NodeHandler{
+
+        @Override
+        public void handlerNode(Element nodeToHandle, List<SqlNode> targetContents) {
+            //对for标签进行解析
+            MixedSqlNode rootSqlNode = parseDynamicTags(nodeToHandle);
+
+           //for标签内参数解析
+            String collection = nodeToHandle.attributeValue("collection");
+            String item = nodeToHandle.attributeValue("item");
+            String index = nodeToHandle.attributeValue("index");
+            String open = nodeToHandle.attributeValue("open");
+            String close = nodeToHandle.attributeValue("close");
+            String separator = nodeToHandle.attributeValue("separator");
+            ForEachSqlNode forEachNode = new ForEachSqlNode(configuration,rootSqlNode,collection,item,index,open,close,separator);
+            targetContents.add(forEachNode);
+        }
     }
 }

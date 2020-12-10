@@ -1,4 +1,9 @@
-package com.martin.mybatis.config;
+package com.martin.mybatis.sqlSource;
+
+import com.martin.mybatis.config.BoundSql;
+import com.martin.mybatis.sqlNode.MixedSqlNode;
+import com.martin.mybatis.sqlNode.SqlNode;
+import com.martin.mybatis.sqlSource.SqlSource;
 
 /**
  * 专门封装和处理 动态标签  ${}的sql语句
