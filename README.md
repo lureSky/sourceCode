@@ -9,6 +9,9 @@
   
 ---
 ## 2020-12-10 16:30
-* 完成情况：完成Mapper解析（仅处理Select标签）   未完成部分：boundsql+apply+其余sqlnode封装处理
-  
+完成情况：
+* 完成Mapper解析（仅处理Select标签）
+* sqlSession相关解析  
+       
 ---
+
