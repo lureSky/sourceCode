@@ -7,14 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="code_inspect" />
+        <module name="design-model" />
         <module name="martin-mybatis-config" />
         <module name="martin-mybatis-demo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="martin-mybatis" target="1.8" />
-      <module name="mybatis-demo" target="1.8" />
-      <module name="untitled" target="1.5" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8" />
   </component>
 </project>
