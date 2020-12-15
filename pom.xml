@@ -13,5 +13,7 @@
         <module>martin-mybatis-config</module>
         <module>martin-mybatis-demo</module>
         <module>design-model</module>
+        <module>martin-spring-customer</module>
+        <module>martin-spring-framework-customer</module>
     </modules>
 </project>
