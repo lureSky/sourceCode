@@ -4,11 +4,19 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+/**
+ * 反射工具类
+ */
 public class ReflectUtils {
 
-	public static Object createObject(String beanClassName, Object... args) {
+	/**
+	 * 使用构造器创建实例
+	 * @param clazz
+	 * @param args
+	 * @return
+	 */
+	public static Object createObject(Class<?> clazz, Object... args) {
 		try {
-			Class<?> clazz = Class.forName(beanClassName);
 			Constructor<?> constructor = clazz.getConstructor();
 			// 默认调用无参构造进行对象的创建
 			return constructor.newInstance();

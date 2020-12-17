@@ -6,7 +6,7 @@ import com.martin.spring.definition.BeanDefinition;
 import com.martin.spring.definition.PropertyValue;
 import com.martin.spring.definition.RuntimeBeanReference;
 import com.martin.spring.definition.TypedStringValue;
-import com.martin.spring.factory.BeanDefinitionRegistry;
+import com.martin.spring.registry.BeanDefinitionRegistry;
 import com.martin.spring.utils.ReflectUtils;
 import org.dom4j.Element;
 
@@ -39,20 +39,20 @@ public class XmlBeanDefinitionDocumentReader {
 	}
 
 	private void parseCustomElement(Element element) {
-		// TODO Auto-generated method stub
 
 	}
 
 	/**
 	 * 
-	 * @param element
+	 * @param beanElement
 	 *            bean标签
 	 */
 	@SuppressWarnings("unchecked")
 	private void parseDefaultElement(Element beanElement) {
 		try {
-			if (beanElement == null)
+			if (beanElement == null) {
 				return;
+			}
 			// 获取id属性
 			String id = beanElement.attributeValue("id");
 
@@ -71,10 +71,8 @@ public class XmlBeanDefinitionDocumentReader {
 			String scope = beanElement.attributeValue("scope");
 			String beanName = id == null ? name : id;
 			beanName = beanName == null ? clazzType.getSimpleName() : beanName;
-			// 创建BeanDefinition对象
-			BeanDefinition beanDefinition = new BeanDefinition(clazzName, beanName);
-			beanDefinition.setInitMethod(initMethod);
-			beanDefinition.setScope(scope);
+			// 创建BeanDefinition对象(构建这模式改造)
+			BeanDefinition beanDefinition = new BeanDefinition(beanName,clazzType.getName(),initMethod,scope);
 			// 获取property子标签集合
 			List<Element> propertyElements = beanElement.elements();
 			for (Element propertyElement : propertyElements) {
@@ -89,8 +87,9 @@ public class XmlBeanDefinitionDocumentReader {
 	}
 
 	private void parsePropertyElement(BeanDefinition beanDefination, Element propertyElement) {
-		if (propertyElement == null)
+		if (propertyElement == null) {
 			return;
+		}
 
 		// 获取name属性
 		String name = propertyElement.attributeValue("name");
@@ -109,10 +108,15 @@ public class XmlBeanDefinitionDocumentReader {
 		 */
 		PropertyValue pv = null;
 
+		/**
+		 * 解析Element对象的时候有两种情况
+		 *
+		 * 1.value解析
+		 * 2.ref解析
+		 */
 		if (value != null && !value.equals("")) {
 			// 因为spring配置文件中的value是String类型，而对象中的属性值是各种各样的，所以需要存储类型
 			TypedStringValue typeStringValue = new TypedStringValue(value);
-
 			Class<?> targetType = ReflectUtils.getTypeByFieldName(beanDefination.getClazzName(), name);
 			typeStringValue.setTargetType(targetType);
 

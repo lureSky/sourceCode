@@ -1,4 +1,4 @@
-package com.martin.spring.factory;
+package com.martin.spring.registry;
 
 import com.martin.spring.definition.BeanDefinition;
 
@@ -17,4 +17,6 @@ public interface BeanDefinitionRegistry {
     void registerBeanDefinition(String beanName, BeanDefinition bd);
 
     BeanDefinition getBeanDefinition(String beanName);
+
+    Object getBean(String string);
 }

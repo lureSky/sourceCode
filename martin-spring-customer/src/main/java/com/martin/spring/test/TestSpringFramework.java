@@ -1,7 +1,8 @@
 package com.martin.spring.test;
 
-import com.martin.spring.factory.BeanDefinitionRegistry;
-import com.martin.spring.factory.DefaultListableBeanFactory;
+import com.martin.spring.registry.BeanDefinitionRegistry;
+import com.martin.spring.factory.support.DefaultListableBeanFactory;
+import com.martin.spring.po.Student;
 import com.martin.spring.reader.XmlBeanDefinitionReader;
 import com.martin.spring.resource.ClasspathResource;
 import com.martin.spring.resource.Resource;
@@ -23,6 +24,8 @@ public class TestSpringFramework {
         //3.加载spring配置文件，并最终将解析出来的BeanDefinition注册到BeanDefinitionRegistry
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanDefinitionRegistry);
         reader.loadBeanDefinitions(resource);
-        System.out.println("");
+
+        Student student = (Student)beanDefinitionRegistry.getBean("student");
+        System.out.println(student);
     }
 }

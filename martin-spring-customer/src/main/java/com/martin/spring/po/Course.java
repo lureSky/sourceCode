@@ -12,4 +12,7 @@ public class Course {
 
     private Integer age;
 
+    public void init(){
+        System.out.println("触发了初始化方法");
+    }
 }

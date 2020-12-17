@@ -1,7 +1,6 @@
 package com.martin.spring.reader;
 
-import com.martin.spring.factory.BeanDefinitionRegistry;
-import com.martin.spring.factory.DefaultListableBeanFactory;
+import com.martin.spring.registry.BeanDefinitionRegistry;
 import com.martin.spring.resource.Resource;
 import com.martin.spring.utils.DocumentReader;
 import org.dom4j.Document;
