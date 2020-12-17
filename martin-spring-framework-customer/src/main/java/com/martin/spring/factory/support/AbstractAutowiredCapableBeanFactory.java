@@ -7,7 +7,9 @@ import com.martin.spring.definition.PropertyValue;
 import com.martin.spring.definition.RuntimeBeanReference;
 import com.martin.spring.definition.TypedStringValue;
 import com.martin.spring.factory.AutowiredCapableBeanFactory;
+import com.martin.spring.strategy.BasicStrategyContainer;
 import com.martin.spring.utils.ReflectUtils;
+import com.martin.spring.xml.InitializingBean;
 
 import java.util.List;
 
@@ -49,8 +51,11 @@ public abstract class AbstractAutowiredCapableBeanFactory extends AbstractBeanFa
                 ((BeanFactoryAware) bean).setBeanFactory(this);
             }
         }
-        //TODO
-        //4.1  实现了InitializingBean接口的类
+        //4.1  实现了InitializingBean接口的类  如果bean实现了initializingBean接口
+        if (bean instanceof InitializingBean) {
+            //后续添加
+            ((InitializingBean) bean).afterPropertiesSet();
+        }
         //4.2   在bean标签中的init-method
         initMehtod(bean,bd);
 
@@ -91,12 +96,8 @@ public abstract class AbstractAutowiredCapableBeanFactory extends AbstractBeanFa
                 String stringValue = typedStringValue.getValue();
                 //获取类型
                 Class<?> targetType = typedStringValue.getTargetType();
-                //TODO 策略模式优化
-                if (targetType == Integer.class) {
-                    valueToUse = Integer.parseInt(stringValue);
-                }else if (targetType == String.class) {
-                    valueToUse = stringValue;
-                }
+                BasicStrategyContainer basicStrategyContainer = new BasicStrategyContainer();
+                valueToUse = basicStrategyContainer.parseByType(targetType,stringValue);
             }else if (value instanceof RuntimeBeanReference) {
                 RuntimeBeanReference runtimeBeanReference = (RuntimeBeanReference) value;
                 String ref = runtimeBeanReference.getRef();
